@@ -1,0 +1,8 @@
+Komut
+docker compose exec -T spark spark-submit is/toplu_performans_deneyi.py --ui-bekle 60
+
+Terminal çıktısı
+Karşılaştırma: 9959 satır | iki düzen de aynı 5xx sayımını verdi
+önce | 64 dosya | 387674 bayt | 6057.4 bayt/dosya | süreler: 68.9 / 56.8 / 72.5 / 58.2 / 56.4 ms | ortanca: 58.2 ms
+sonra | 8 dosya | 217743 bayt | 27217.9 bayt/dosya | süreler: 62.1 / 63.3 / 68.5 / 58.8 / 55.1 ms | ortanca: 62.1 ms
+Spark UI: http://localhost:4040/ · 60 saniye açık

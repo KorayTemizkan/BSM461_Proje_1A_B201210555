@@ -1,0 +1,15 @@
+Komut
+docker compose exec -T spark spark-submit is/toplu_delta_deneyi.py
+
+Terminal çıktısının sonuç bölümü
+Deney tablosu: s3a://tablolar/toplu-log-delta-deneyi/ffc0219b59f34ee0be718110998a708d
+Deney tablosundan çıkarılan gün: 2026-11-11 | kayıt: 1328
+Sürüm 0 (zaman yolculuğu): 9959 | sürüm 1 (güncel): 8631
++-------+---------+
+|version|operation|
++-------+---------+
+|      0|    WRITE|
+|      1|   DELETE|
++-------+---------+
+
+Delta zaman yolculuğu doğrulandı.

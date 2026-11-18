@@ -1,0 +1,196 @@
+Komut
+docker compose exec -T spark spark-submit is/toplu_atomik_deney.py
+
+Terminal çıktısı
+Yazma öncesi: sürüm 0 | 9959 satır
+14:32:02 ERROR Executor: Exception in task 0.0 in stage 38.0 (TID 370)
+java.lang.RuntimeException: BSM461_KASITLI_YAZMA_HATASI
+        at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source) ~[?:?]
+        at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:490) ~[scala-library-2.12.18.jar:?]
+        at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:225) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SortExec.$anonfun$doExecute$1(SortExec.scala:119) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.iterator(RDD.scala:331) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.Task.run(Task.scala:141) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64) ~[spark-common-utils_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61) ~[spark-common-utils_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623) [spark-core_2.12-3.5.3.jar:3.5.3]
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) [?:?]
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) [?:?]
+        at java.lang.Thread.run(Thread.java:840) [?:?]
+14:32:02 WARN TaskSetManager: Lost task 0.0 in stage 38.0 (TID 370) (34987e4b287b executor driver): java.lang.RuntimeException: BSM461_KASITLI_YAZMA_HATASI
+        at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+        at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+        at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+        at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:490)
+        at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:225)
+        at org.apache.spark.sql.execution.SortExec.$anonfun$doExecute$1(SortExec.scala:119)
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+        at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+        at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+        at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+        at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+        at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+        at org.apache.spark.scheduler.Task.run(Task.scala:141)
+        at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+        at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+        at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+        at java.base/java.lang.Thread.run(Thread.java:840)
+
+14:32:02 ERROR TaskSetManager: Task 0 in stage 38.0 failed 1 times; aborting job
+14:32:02 ERROR DeltaFileFormatWriter: Aborting job 0321d1b5-691e-4372-8e4b-bead39a40035.
+org.apache.spark.SparkException: Job aborted due to stage failure: Task 0 in stage 38.0 failed 1 times, most recent failure: Lost task 0.0 in stage 38.0 (TID 370) (34987e4b287b executor driver): java.lang.RuntimeException: BSM461_KASITLI_YAZMA_HATASI
+        at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source)
+        at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43)
+        at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43)
+        at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:490)
+        at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:225)
+        at org.apache.spark.sql.execution.SortExec.$anonfun$doExecute$1(SortExec.scala:119)
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893)
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893)
+        at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52)
+        at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367)
+        at org.apache.spark.rdd.RDD.iterator(RDD.scala:331)
+        at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93)
+        at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166)
+        at org.apache.spark.scheduler.Task.run(Task.scala:141)
+        at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620)
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64)
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61)
+        at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94)
+        at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623)
+        at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+        at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+        at java.base/java.lang.Thread.run(Thread.java:840)
+
+Driver stacktrace:
+        at org.apache.spark.scheduler.DAGScheduler.failJobAndIndependentStages(DAGScheduler.scala:2856) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2(DAGScheduler.scala:2792) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGScheduler.$anonfun$abortStage$2$adapted(DAGScheduler.scala:2791) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at scala.collection.mutable.ResizableArray.foreach(ResizableArray.scala:62) ~[scala-library-2.12.18.jar:?]
+        at scala.collection.mutable.ResizableArray.foreach$(ResizableArray.scala:55) ~[scala-library-2.12.18.jar:?]
+        at scala.collection.mutable.ArrayBuffer.foreach(ArrayBuffer.scala:49) ~[scala-library-2.12.18.jar:?]
+        at org.apache.spark.scheduler.DAGScheduler.abortStage(DAGScheduler.scala:2791) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1(DAGScheduler.scala:1247) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGScheduler.$anonfun$handleTaskSetFailed$1$adapted(DAGScheduler.scala:1247) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at scala.Option.foreach(Option.scala:407) ~[scala-library-2.12.18.jar:?]
+        at org.apache.spark.scheduler.DAGScheduler.handleTaskSetFailed(DAGScheduler.scala:1247) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.doOnReceive(DAGScheduler.scala:3060) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2994) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGSchedulerEventProcessLoop.onReceive(DAGScheduler.scala:2983) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.util.EventLoop$$anon$1.run(EventLoop.scala:49) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.DAGScheduler.runJob(DAGScheduler.scala:989) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.SparkContext.runJob(SparkContext.scala:2393) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.delta.files.DeltaFileFormatWriter$.$anonfun$executeWrite$1(DeltaFileFormatWriter.scala:263) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.DeltaFileFormatWriter$.writeAndCommit(DeltaFileFormatWriter.scala:295) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.DeltaFileFormatWriter$.executeWrite(DeltaFileFormatWriter.scala:234) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.DeltaFileFormatWriter$.write(DeltaFileFormatWriter.scala:214) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.TransactionalWrite.$anonfun$writeFiles$1(TransactionalWrite.scala:440) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:125) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:201) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:108) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:66) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.delta.files.TransactionalWrite.writeFiles(TransactionalWrite.scala:398) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.TransactionalWrite.writeFiles$(TransactionalWrite.scala:371) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.OptimisticTransaction.writeFiles(OptimisticTransaction.scala:147) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.TransactionalWrite.writeFiles(TransactionalWrite.scala:246) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.TransactionalWrite.writeFiles$(TransactionalWrite.scala:242) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.OptimisticTransaction.writeFiles(OptimisticTransaction.scala:147) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.TransactionalWrite.writeFiles(TransactionalWrite.scala:235) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.files.TransactionalWrite.writeFiles$(TransactionalWrite.scala:232) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.OptimisticTransaction.writeFiles(OptimisticTransaction.scala:147) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.commands.WriteIntoDelta.writeFiles(WriteIntoDelta.scala:349) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.commands.WriteIntoDelta.writeAndReturnCommitData(WriteIntoDelta.scala:297) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.commands.WriteIntoDelta.$anonfun$run$1(WriteIntoDelta.scala:106) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.commands.WriteIntoDelta.$anonfun$run$1$adapted(WriteIntoDelta.scala:101) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.DeltaLog.withNewTransaction(DeltaLog.scala:227) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.commands.WriteIntoDelta.run(WriteIntoDelta.scala:101) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.delta.sources.DeltaDataSource.createRelation(DeltaDataSource.scala:201) ~[io.delta_delta-spark_2.12-3.2.1.jar:3.2.1]
+        at org.apache.spark.sql.execution.datasources.SaveIntoDataSourceCommand.run(SaveIntoDataSourceCommand.scala:48) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult$lzycompute(commands.scala:75) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.command.ExecutedCommandExec.sideEffectResult(commands.scala:73) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.command.ExecutedCommandExec.executeCollect(commands.scala:84) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.$anonfun$applyOrElse$1(QueryExecution.scala:107) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$6(SQLExecution.scala:125) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SQLExecution$.withSQLConfPropagated(SQLExecution.scala:201) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SQLExecution$.$anonfun$withNewExecutionId$1(SQLExecution.scala:108) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.SparkSession.withActive(SparkSession.scala:900) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SQLExecution$.withNewExecutionId(SQLExecution.scala:66) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:107) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.QueryExecution$$anonfun$eagerlyExecuteCommands$1.applyOrElse(QueryExecution.scala:98) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.trees.TreeNode.$anonfun$transformDownWithPruning$1(TreeNode.scala:461) ~[spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.trees.CurrentOrigin$.withOrigin(origin.scala:76) [spark-sql-api_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.trees.TreeNode.transformDownWithPruning(TreeNode.scala:461) [spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.org$apache$spark$sql$catalyst$plans$logical$AnalysisHelper$$super$transformDownWithPruning(LogicalPlan.scala:32) [spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning(AnalysisHelper.scala:267) [spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.plans.logical.AnalysisHelper.transformDownWithPruning$(AnalysisHelper.scala:263) [spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32) [spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.plans.logical.LogicalPlan.transformDownWithPruning(LogicalPlan.scala:32) [spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.catalyst.trees.TreeNode.transformDown(TreeNode.scala:437) [spark-catalyst_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.QueryExecution.eagerlyExecuteCommands(QueryExecution.scala:98) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.QueryExecution.commandExecuted$lzycompute(QueryExecution.scala:85) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.QueryExecution.commandExecuted(QueryExecution.scala:83) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.QueryExecution.assertCommandExecuted(QueryExecution.scala:142) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.DataFrameWriter.runCommand(DataFrameWriter.scala:869) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:391) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:307) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:243) [spark-sql_2.12-3.5.3.jar:3.5.3]
+        at jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:?]
+        at jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77) ~[?:?]
+        at jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:?]
+        at java.lang.reflect.Method.invoke(Method.java:569) ~[?:?]
+        at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244) [py4j-0.10.9.7.jar:?]
+        at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374) [py4j-0.10.9.7.jar:?]
+        at py4j.Gateway.invoke(Gateway.java:282) [py4j-0.10.9.7.jar:?]
+        at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132) [py4j-0.10.9.7.jar:?]
+        at py4j.commands.CallCommand.execute(CallCommand.java:79) [py4j-0.10.9.7.jar:?]
+        at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182) [py4j-0.10.9.7.jar:?]
+        at py4j.ClientServerConnection.run(ClientServerConnection.java:106) [py4j-0.10.9.7.jar:?]
+        at java.lang.Thread.run(Thread.java:840) [?:?]
+Caused by: java.lang.RuntimeException: BSM461_KASITLI_YAZMA_HATASI
+        at org.apache.spark.sql.catalyst.expressions.GeneratedClass$GeneratedIteratorForCodegenStage1.processNext(Unknown Source) ~[?:?]
+        at org.apache.spark.sql.execution.BufferedRowIterator.hasNext(BufferedRowIterator.java:43) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.WholeStageCodegenEvaluatorFactory$WholeStageCodegenPartitionEvaluator$$anon$1.hasNext(WholeStageCodegenEvaluatorFactory.scala:43) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at scala.collection.Iterator$$anon$11.hasNext(Iterator.scala:490) ~[scala-library-2.12.18.jar:?]
+        at org.apache.spark.sql.execution.UnsafeExternalRowSorter.sort(UnsafeExternalRowSorter.java:225) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.sql.execution.SortExec.$anonfun$doExecute$1(SortExec.scala:119) ~[spark-sql_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2(RDD.scala:893) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.$anonfun$mapPartitionsInternal$2$adapted(RDD.scala:893) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.MapPartitionsRDD.compute(MapPartitionsRDD.scala:52) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.computeOrReadCheckpoint(RDD.scala:367) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.rdd.RDD.iterator(RDD.scala:331) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.ResultTask.runTask(ResultTask.scala:93) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.TaskContext.runTaskWithListeners(TaskContext.scala:166) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.scheduler.Task.run(Task.scala:141) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.executor.Executor$TaskRunner.$anonfun$run$4(Executor.scala:620) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally(SparkErrorUtils.scala:64) ~[spark-common-utils_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.util.SparkErrorUtils.tryWithSafeFinally$(SparkErrorUtils.scala:61) ~[spark-common-utils_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.util.Utils$.tryWithSafeFinally(Utils.scala:94) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at org.apache.spark.executor.Executor$TaskRunner.run(Executor.scala:623) ~[spark-core_2.12-3.5.3.jar:3.5.3]
+        at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136) ~[?:?]
+        at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635) ~[?:?]
+        ... 1 more
+Beklenen yazma hatası: BSM461_KASITLI_YAZMA_HATASI
+Yazma sonrası: sürüm 0 | 9959 satır
++-------+---------+
+|version|operation|
++-------+---------+
+|      0|    WRITE|
++-------+---------+
+
+Atomik yazma deneyi doğrulandı. Deney tablosu: s3a://tablolar/toplu-log-atomik-deney/1674af74895845cdb1ccfdaca23d1879
