@@ -1,0 +1,27 @@
+BSM461 · Grup B201210555 · 18.11.2026
+Delta ve Parquet canlı kesinti deneyi
+Aşağıda PowerShell oturumunun ilgili bölümleri yer alır. Klasör istemleri ve Docker öneri satırları çıkarılmıştır.
+
+docker compose exec -T araclar python araclar/uretici.py --grup B201210555 --sablon log --toplu 3000000 --gun 14 --ekle
+✓ toplam 3.000.000 satır S3'e yazıldı (içinde 5.751 tekrar) · grup B201210555
+
+docker compose exec -T spark spark-submit --master "local[2]" is/toplu_canli_kesinti.py hazirla
+Üzerine yazım için ham kaynak: 3010000 satır
+Delta: sürüm 0 | okunabilen 1000 satır
+Parquet: okunabilen 1000 satır
+
+docker compose exec spark spark-submit --master "local[2]" is/toplu_canli_kesinti.py delta
+Üzerine yazım başlıyor: delta. Görev başlayınca Ctrl+C yapın.
+YAZMA GOREVI BASLADI: Ctrl+C ile simdi kesin.
+YAZMA GOREVI BASLADI: Ctrl+C ile simdi kesin.
+^C
+
+docker compose exec spark spark-submit --master "local[2]" is/toplu_canli_kesinti.py parquet
+Üzerine yazım başlıyor: parquet. Görev başlayınca Ctrl+C yapın.
+YAZMA GOREVI BASLADI: Ctrl+C ile simdi kesin.
+YAZMA GOREVI BASLADI: Ctrl+C ile simdi kesin.
+^C
+
+docker compose exec -T spark spark-submit --master "local[2]" is/toplu_canli_kesinti.py kontrol
+Delta: sürüm 0 | okunabilen 1000 satır
+Parquet: okunamadı | [UNABLE_TO_INFER_SCHEMA] Unable to infer schema for Parquet. It must be specified manually.
