@@ -1,0 +1,46 @@
+{
+  "took" : 48,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 293,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [ ]
+  },
+  "aggregations" : {
+    "yollar" : {
+      "doc_count_error_upper_bound" : 0,
+      "sum_other_doc_count" : 205,
+      "buckets" : [
+        {
+          "key" : "/sepet",
+          "doc_count" : 21
+        },
+        {
+          "key" : "/giris",
+          "doc_count" : 17
+        },
+        {
+          "key" : "/kampanya",
+          "doc_count" : 17
+        },
+        {
+          "key" : "/static/app.js",
+          "doc_count" : 17
+        },
+        {
+          "key" : "/odeme",
+          "doc_count" : 16
+        }
+      ]
+    }
+  }
+}

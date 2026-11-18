@@ -1,0 +1,11 @@
+1794931386.965 16:03:06 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+1794931387.298 16:03:07 WARN ResolveWriteToStream: spark.sql.adaptive.enabled is not supported in streaming DataFrames/Datasets and will be disabled.
+1794931387.430 Temiz loglar ve metrikler çalışıyor · s3a://islenmis/akis/log/uyari
+1794931397.281 16:03:17 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 5000 milliseconds, but spent 9826 milliseconds
+1794931405.401 16:03:25 WARN MemoryManager: Total allocation exceeds 95.00% (1,020,054,720 bytes) of heap memory
+1794931405.401 Scaling row group sizes to 95.00% for 8 writers
+1794931411.750 16:03:31 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 5000 milliseconds, but spent 11749 milliseconds
+1794931416.987 16:03:36 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 5000 milliseconds, but spent 5237 milliseconds
+1794931419.924 5xx eşiği · UTC 2026-11-17 16:03:00 · 50/50 · 100.0%
+1794931426.365 16:03:46 WARN ProcessingTimeExecutor: Current batch is falling behind. The trigger interval is 5000 milliseconds, but spent 6364 milliseconds
+1794931650.194 

@@ -267,6 +267,12 @@ def kirlet(o, r, oran):
 
 
 # ─────────────────────────────────────────────────────────── kipler
+def kafka_anahtari(o, alan):
+    if alan == "ip-yol":
+        return f"{o.get('ip') or ''}|{o.get('yol') or ''}".encode("utf-8")
+    return str(o.get(alan, "")).encode("utf-8")
+
+
 def akis(a, olay, anahtar, r):
     from confluent_kafka import Producer
     idempotent = a.acks == "all" and not a.idempotent_kapali         # idempotent üretici acks=all ister
@@ -291,7 +297,7 @@ def akis(a, olay, anahtar, r):
                     continue
                 o = {"olay_zamani": zaman_damgasi(an), **kirlet(o, r, a.kirli_orani)}
                 deger = json.dumps(o, ensure_ascii=False).encode("utf-8")
-                anah = str(o.get(anahtar, "")).encode("utf-8")
+                anah = kafka_anahtari(o, anahtar)
                 p.produce(konu, key=anah, value=deger)
                 if r.random() < a.tekrar_orani:                 # aynı olay ikinci kez
                     p.produce(konu, key=anah, value=deger)
@@ -360,6 +366,8 @@ if __name__ == "__main__":
     ap.add_argument("--hiz", type=int, default=20, help="akış: saniyedeki olay sayısı (varsayılan 20)")
     ap.add_argument("--sure", type=int, default=0, help="akış: kaç saniye sürsün (0 = Ctrl+C'ye kadar)")
     ap.add_argument("--konu", default=None, help="akış: Kafka konusu (varsayılan şablona göre)")
+    ap.add_argument("--kafka-anahtar", choices=["ip", "yol", "ip-yol"],
+                    help="log akışı: Kafka bölüm anahtarı (varsayılan ip)")
     ap.add_argument("--toplu", type=int, default=0, help="toplu: S3'e yazılacak olay sayısı")
     ap.add_argument("--gun", type=int, default=7, help="toplu: kaç günlük geçmiş (varsayılan 7)")
     ap.add_argument("--grup", default=None, help="grup kodu: üyelerin en küçük öğrenci numarası (verinizi belirler)")
@@ -372,6 +380,8 @@ if __name__ == "__main__":
     ap.add_argument("--tekrar-orani", type=float, default=0.002, help="iki kez gönderilen olay oranı")
     ap.add_argument("--tohum", type=int, default=None, help="rastgelelik tohumu (varsayılan: grup kodundan)")
     a = ap.parse_args()
+    if a.kafka_anahtar and (a.sablon != "log" or a.toplu):
+        ap.error("--kafka-anahtar yalnızca log akışında kullanılır")
     if not a.grup:
         print("⚠️  --grup verilmedi: ÖRNEK veri üretiliyor. Projede kendi grup kodunuzu kullanın.")
     a.grup = normalle(a.grup)
@@ -383,4 +393,4 @@ if __name__ == "__main__":
     if a.toplu:
         toplu(a, olay, r)
     else:
-        akis(a, olay, SABLONLAR[a.sablon]["anahtar"], r)
+        akis(a, olay, a.kafka_anahtar or SABLONLAR[a.sablon]["anahtar"], r)

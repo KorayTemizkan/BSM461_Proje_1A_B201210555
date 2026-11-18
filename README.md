@@ -50,43 +50,27 @@ aynı anda **tek** Spark işi çalıştırın ve kullanmadığınız Kibana'yı 
 
 ---
 
-## 2. Kurulum — beş adım
+## 2. Kurulum
+
+Aşağıdaki Linux komutlarını klonladığınız depo klasöründe çalıştırın.
 
 ```bash
-# 1) Kit klasörüne girin
-cd kit
-
-# 2) Çekirdeği başlatın (ilk seferde imajlar indirilir: 5–15 dakika)
-docker compose up -d
-
-# 3) Kapsayıcıların durumuna bakın — kafka ve s3 "healthy" olmalı
-docker compose ps
-
-# 4) Doğrulayın (≈10 saniye)
-./dogrula.sh
-
-# 5) Spark tarafını da doğrulayın (ilk seferde kütüphaneler indirilir: 3–7 dakika)
-./dogrula.sh --tam
+sudo docker compose build araclar
+sudo docker compose --profile arama up -d --no-build
+sudo docker compose ps -a
 ```
 
-Beklenen çıktı:
+`araclar` ve `s3-kur` aynı imajı kullanır. İmajı bir kez derleyip servisleri
+o imajla başlatıyoruz. `docker-compose.yml` içinde S3 sağlık kontrolü
+Docker ağındaki `s3:9333` adresini kullanır.
 
-```
-  ✅  Kafka  · yaz → oku                             yazılan mesaj geri okundu
-  ✅  S3     · kovalar ve yaz → oku                  kovalar: ham, islenmis, tablolar · yaz/oku çalışıyor
-  ✅  DuckDB · s3:// üzerinden Parquet               DuckDB s3:// üzerinden Parquet yazdı ve okudu (1 satır)
-  ➖  Elasticsearch (yalnızca --profile arama ile)   kapalı — açmak için: docker compose --profile arama up -d
-  ➖  MongoDB (yalnızca --profile servis ile)        kapalı — açmak için: docker compose --profile servis up -d
+`s3-kur` başarıyla tamamlandıktan sonra ortamı doğrulayın.
 
-  🎉 Çekirdek kit çalışıyor.
-
-✅ Spark → S3 Parquet yazdı ve okudu (1000 satır)
-✅ Delta Lake: 2 sürüm · zaman yolculuğu (sürüm 0) 1000 satır
-✅ Spark → Kafka okudu ('kit-dogrulama' konusunda 1 mesaj)
-🎉 Spark tarafı çalışıyor.
+```bash
+sudo ./dogrula.sh --tam
 ```
 
-🔴 **Bu çıktının ekran görüntüsü, proje raporunuzun ekinde istenir** ("Ek: ortam kanıtı").
+Doğrulama ekran görüntüsü `kanit/ortam.png` dosyasındadır.
 
 ---
 
@@ -201,14 +185,18 @@ Aynı grup kodu her çalıştırmada **aynı** veriyi üretir; ölçümlerinizi 
 # Toplu hat (önce toplu veri üretin)
 docker compose exec spark spark-submit is/toplu_is.py --sablon log
 
-# Akış hattı (iki ayrı terminal)
-docker compose exec araclar python araclar/uretici.py --grup <kodunuz> --sablon iot --hiz 50
-docker compose exec spark spark-submit is/akis_iskelet.py --sablon iot
-#   çıktıyı S3'e yazmak için:  ... akis_iskelet.py --sablon iot --cikti s3
+# Grup B201210555 — web logu akış ve Elasticsearch denemesi
+sudo docker compose exec -T kafka /opt/kafka/bin/kafka-topics.sh \
+  --bootstrap-server localhost:9092 --create --if-not-exists \
+  --topic web-loglari-demo --partitions 8 --replication-factor 1
 
-# Arama (şablon 1 ve 4)
-docker compose --profile arama up -d
-docker compose exec araclar python araclar/arama_ornek.py --sorgu "ihracatımızdan"
+sudo docker compose exec -T araclar python araclar/uretici.py \
+  --grup B201210555 --sablon log --konu web-loglari-demo \
+  --kafka-anahtar ip-yol --hiz 50 --sure 10
+
+sudo docker compose exec -T spark spark-submit is/akis_iskelet.py \
+  --sablon log --cikti s3 --deney demo --konu web-loglari-demo \
+  --es http://elasticsearch:9200 --bekleyeni-isle
 
 # Servis deposu örneği (MongoDB) — Python'dan pymongo ile: mongodb://mongo:27017
 docker compose --profile servis up -d

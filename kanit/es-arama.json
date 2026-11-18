@@ -1,0 +1,94 @@
+{
+  "took" : 69,
+  "timed_out" : false,
+  "_shards" : {
+    "total" : 1,
+    "successful" : 1,
+    "skipped" : 0,
+    "failed" : 0
+  },
+  "hits" : {
+    "total" : {
+      "value" : 293,
+      "relation" : "eq"
+    },
+    "max_score" : null,
+    "hits" : [
+      {
+        "_index" : "web-loglari-arama",
+        "_id" : "9271b47e70461d2d6865242094df61a12012ad0ced2eee02a59c967f97da5730",
+        "_score" : null,
+        "_source" : {
+          "olay_zamani" : "2026-11-17T15:50:23.784Z",
+          "yontem" : "GET",
+          "yol" : "/urun/325",
+          "durum" : 500,
+          "sure_ms" : 582.5
+        },
+        "sort" : [
+          1794930623784
+        ]
+      },
+      {
+        "_index" : "web-loglari-arama",
+        "_id" : "2639db900ad8ae36c966b9d176eb81592569d9532bec2a5e0cc6e4e663dc22ab",
+        "_score" : null,
+        "_source" : {
+          "olay_zamani" : "2026-11-17T15:50:23.783Z",
+          "yontem" : "GET",
+          "yol" : "/api/arama",
+          "durum" : 500,
+          "sure_ms" : 81.6
+        },
+        "sort" : [
+          1794930623783
+        ]
+      },
+      {
+        "_index" : "web-loglari-arama",
+        "_id" : "682f9925baf9dcb82295a43f92768b923dcc96687e1a70c118afa3e02a1cc7dc",
+        "_score" : null,
+        "_source" : {
+          "olay_zamani" : "2026-11-17T15:50:23.783Z",
+          "yontem" : "GET",
+          "yol" : "/urun/231",
+          "durum" : 500,
+          "sure_ms" : 38.9
+        },
+        "sort" : [
+          1794930623783
+        ]
+      },
+      {
+        "_index" : "web-loglari-arama",
+        "_id" : "c28776267e4e38d4190f320aa77e9afa1cb6d4b99a8db483d92728f1b8187dc8",
+        "_score" : null,
+        "_source" : {
+          "olay_zamani" : "2026-11-17T15:50:23.783Z",
+          "yontem" : "GET",
+          "yol" : "/static/logo.png",
+          "durum" : 503,
+          "sure_ms" : 62.3
+        },
+        "sort" : [
+          1794930623783
+        ]
+      },
+      {
+        "_index" : "web-loglari-arama",
+        "_id" : "18818e1e89df8ef4499b3e3f22b5a76abb3b5af86dba3c167d95b4d862b50234",
+        "_score" : null,
+        "_source" : {
+          "olay_zamani" : "2026-11-17T15:50:23.782Z",
+          "yontem" : "POST",
+          "yol" : "/api/stok/128",
+          "durum" : 500,
+          "sure_ms" : 10.9
+        },
+        "sort" : [
+          1794930623782
+        ]
+      }
+    ]
+  }
+}
