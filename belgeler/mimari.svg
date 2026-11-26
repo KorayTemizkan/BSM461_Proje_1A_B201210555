@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 418" role="img" aria-labelledby="baslik aciklama">
+  <title id="baslik">B201210555 web logu mimarisi</title>
+  <desc id="aciklama">Sentetik üreticiden Kafka, Spark ve Elasticsearch'e akış. Üreticiden SeaweedFS'e, Spark toplu işe ve rapora toplu hat.</desc>
+  <defs>
+    <marker id="akis" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path fill="#1b6571" d="M0 0 L10 5 L0 10 z"/></marker>
+    <marker id="toplu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path fill="#865022" d="M0 0 L10 5 L0 10 z"/></marker>
+  </defs>
+  <rect width="1120" height="418" rx="20" fill="#f4f7fa"/>
+  <g font-family="DejaVu Sans,sans-serif" fill="#172c3f">
+    <text x="26" y="34" font-size="17" font-weight="700" fill="#1b6571">Akış hattı</text>
+    <g stroke="#1b6571" stroke-width="3" fill="none" marker-end="url(#akis)">
+      <path d="M120 118 H142"/><path d="M285 118 H306"/><path d="M464 118 H485"/>
+      <path d="M656 118 H678"/><path d="M865 118 H886"/>
+    </g>
+    <g fill="white" stroke="#9cbec7">
+      <rect x="22" y="55" width="98" height="125" rx="11"/>
+      <rect x="143" y="55" width="142" height="125" rx="11"/>
+      <rect x="307" y="55" width="157" height="125" rx="11"/>
+      <rect x="486" y="55" width="170" height="125" rx="11"/>
+      <rect x="679" y="55" width="186" height="125" rx="11"/>
+      <rect x="887" y="55" width="211" height="125" rx="11"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="71" y="84" font-size="15" font-weight="700">Kaynak</text>
+      <text x="71" y="115" font-size="14"><tspan x="71">Sentetik</tspan><tspan x="71" dy="20">web olayı</tspan></text>
+      <text x="214" y="84" font-size="15" font-weight="700">Toplama</text>
+      <text x="214" y="115" font-size="14"><tspan x="214">Python 3.12</tspan><tspan x="214" dy="20">uretici.py</tspan><tspan x="214" dy="20">acks=all</tspan></text>
+      <text x="385" y="84" font-size="15" font-weight="700">Günlük / kuyruk</text>
+      <text x="385" y="115" font-size="14"><tspan x="385">Kafka 4.0.0</tspan><tspan x="385" dy="20">8 bölüm</tspan><tspan x="385" dy="20">anahtar IP–yol</tspan></text>
+      <text x="571" y="84" font-size="15" font-weight="700">Akış işleme</text>
+      <text x="571" y="115" font-size="14"><tspan x="571">Spark 3.5.3</tspan><tspan x="571" dy="20">Delta Lake 3.2.1</tspan><tspan x="571" dy="20">temizleme ve pencere</tspan></text>
+      <text x="772" y="84" font-size="15" font-weight="700">Servis deposu</text>
+      <text x="772" y="115" font-size="14"><tspan x="772">Elasticsearch 8.15.3</tspan><tspan x="772" dy="20">olay indeksleri</tspan><tspan x="772" dy="20">1 shard · 0 replika</tspan></text>
+      <text x="992" y="84" font-size="15" font-weight="700">Sunum</text>
+      <text x="992" y="115" font-size="14"><tspan x="992">Spark konsolu</tspan><tspan x="992" dy="20">Elasticsearch REST 8.15.3</tspan><tspan x="992" dy="20">Python analiz grafikleri</tspan></text>
+    </g>
+    <text x="26" y="247" font-size="17" font-weight="700" fill="#865022">Toplu hat</text>
+    <g stroke="#865022" stroke-width="3" fill="none" marker-end="url(#toplu)">
+      <path d="M213 180 V313 H289"/><path d="M482 313 H530"/><path d="M782 313 H991 V181"/>
+    </g>
+    <g stroke="#1b6571" stroke-width="2.4" stroke-dasharray="6 4" fill="none" marker-end="url(#akis)">
+      <path d="M570 180 V222 H389 V261"/><path d="M427 261 V241 H613 V181"/>
+    </g>
+    <text x="421" y="215" font-size="13" fill="#1b6571">Delta ve checkpoint</text>
+    <text x="646" y="243" font-size="13" fill="#1b6571">Temiz Delta, ikinci sorgunun girdisi</text>
+    <path d="M656 94 H665 V46 H991 V54" stroke="#1b6571" stroke-width="2" stroke-dasharray="6 4" fill="none" marker-end="url(#akis)"/>
+    <text x="748" y="39" font-size="13" fill="#1b6571">5xx uyarıları ve pencere raporu</text>
+    <g fill="#fffcf7" stroke="#c4a983">
+      <rect x="290" y="262" width="192" height="105" rx="11"/>
+      <rect x="531" y="262" width="251" height="105" rx="11"/>
+    </g>
+    <g text-anchor="middle">
+      <text x="386" y="291" font-size="15" font-weight="700">Nesne deposu</text>
+      <text x="386" y="316" font-size="14"><tspan x="386">SeaweedFS 4.48 · S3</tspan><tspan x="386" dy="20">Ham JSONL ve IP boyutu</tspan><tspan x="386" dy="20">Delta ve checkpoint</tspan></text>
+      <text x="656" y="291" font-size="15" font-weight="700">Toplu işleme</text>
+      <text x="656" y="316" font-size="14"><tspan x="656">Spark 3.5.3 · Delta Lake 3.2.1</tspan><tspan x="656" dy="20">Temizlik, IP birleştirme, iki sorgu</tspan><tspan x="656" dy="20">S3'e Parquet ve Delta çıktısı</tspan></text>
+    </g>
+    <text x="794" y="301" font-size="13" fill="#865022">Toplu özet CSV'ler</text>
+    <path d="M656 368 V391 H386 V367" stroke="#865022" stroke-width="2.4" fill="none" marker-end="url(#toplu)"/>
+    <text x="487" y="410" font-size="13" fill="#865022">Parquet ve Delta</text>
+  </g>
+</svg>

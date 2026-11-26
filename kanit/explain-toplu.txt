@@ -1,0 +1,642 @@
+BSM461 · Spark 3.5.3 · 25.11.2026 · explain(mode="formatted")
+
+IP boyutuyla birleştirme
+== Physical Plan ==
+AdaptiveSparkPlan (54)
++- InMemoryTableScan (1)
+      +- InMemoryRelation (2)
+            +- AdaptiveSparkPlan (53)
+               +- == Final Plan ==
+                  * Project (40)
+                  +- * BroadcastHashJoin LeftOuter BuildRight (39)
+                     :- TableCacheQueryStage (22), Statistics(sizeInBytes=854.7 KiB, rowCount=9.96E+3)
+                     :  +- InMemoryTableScan (3)
+                     :        +- InMemoryRelation (4)
+                     :              +- AdaptiveSparkPlan (21)
+                     +- == Final Plan ==
+                        * Project (18)
+                        +- * Filter (17)
+                           +- TableCacheQueryStage (16), Statistics(sizeInBytes=1757.4 KiB)
+                              +- InMemoryTableScan (5)
+                                    +- InMemoryRelation (6)
+                                          +- AdaptiveSparkPlan (15)
+                     +- == Final Plan ==
+                        * HashAggregate (11)
+                        +- ShuffleQueryStage (10), Statistics(sizeInBytes=1498.5 KiB, rowCount=9.98E+3)
+                           +- Exchange (9)
+                              +- * HashAggregate (8)
+                                 +- Scan json  (7)
+                     +- == Initial Plan ==
+                        HashAggregate (14)
+                        +- Exchange (13)
+                           +- HashAggregate (12)
+                              +- Scan json  (7)
+                     +- == Initial Plan ==
+                        Project (20)
+                        +- Filter (19)
+                           +- InMemoryTableScan (5)
+                                 +- InMemoryRelation (6)
+                                       +- AdaptiveSparkPlan (15)
+                  +- == Final Plan ==
+                     * HashAggregate (11)
+                     +- ShuffleQueryStage (10), Statistics(sizeInBytes=1498.5 KiB, rowCount=9.98E+3)
+                        +- Exchange (9)
+                           +- * HashAggregate (8)
+                              +- Scan json  (7)
+                  +- == Initial Plan ==
+                     HashAggregate (14)
+                     +- Exchange (13)
+                        +- HashAggregate (12)
+                           +- Scan json  (7)
+                     +- BroadcastQueryStage (38), Statistics(sizeInBytes=8.1 MiB, rowCount=2.00E+3)
+                        +- BroadcastExchange (37)
+                           +- SortAggregate (36)
+                              +- * Sort (35)
+                                 +- AQEShuffleRead (34)
+                                    +- ShuffleQueryStage (33), Statistics(sizeInBytes=140.7 KiB, rowCount=2.00E+3)
+                                       +- Exchange (32)
+                                          +- SortAggregate (31)
+                                             +- * Sort (30)
+                                                +- * HashAggregate (29)
+                                                   +- AQEShuffleRead (28)
+                                                      +- ShuffleQueryStage (27), Statistics(sizeInBytes=125.1 KiB, rowCount=2.00E+3)
+                                                         +- Exchange (26)
+                                                            +- * HashAggregate (25)
+                                                               +- * Filter (24)
+                                                                  +- Scan csv  (23)
+               +- == Initial Plan ==
+                  Project (52)
+                  +- BroadcastHashJoin LeftOuter BuildRight (51)
+                     :- InMemoryTableScan (3)
+                     :     +- InMemoryRelation (4)
+                     :           +- AdaptiveSparkPlan (21)
+                  +- == Final Plan ==
+                     * Project (18)
+                     +- * Filter (17)
+                        +- TableCacheQueryStage (16), Statistics(sizeInBytes=1757.4 KiB)
+                           +- InMemoryTableScan (5)
+                                 +- InMemoryRelation (6)
+                                       +- AdaptiveSparkPlan (15)
+                     +- == Final Plan ==
+                        * HashAggregate (11)
+                        +- ShuffleQueryStage (10), Statistics(sizeInBytes=1498.5 KiB, rowCount=9.98E+3)
+                           +- Exchange (9)
+                              +- * HashAggregate (8)
+                                 +- Scan json  (7)
+                     +- == Initial Plan ==
+                        HashAggregate (14)
+                        +- Exchange (13)
+                           +- HashAggregate (12)
+                              +- Scan json  (7)
+                  +- == Initial Plan ==
+                     Project (20)
+                     +- Filter (19)
+                        +- InMemoryTableScan (5)
+                              +- InMemoryRelation (6)
+                                    +- AdaptiveSparkPlan (15)
+                  +- == Final Plan ==
+                     * HashAggregate (11)
+                     +- ShuffleQueryStage (10), Statistics(sizeInBytes=1498.5 KiB, rowCount=9.98E+3)
+                        +- Exchange (9)
+                           +- * HashAggregate (8)
+                              +- Scan json  (7)
+                  +- == Initial Plan ==
+                     HashAggregate (14)
+                     +- Exchange (13)
+                        +- HashAggregate (12)
+                           +- Scan json  (7)
+                     +- BroadcastExchange (50)
+                        +- SortAggregate (49)
+                           +- Sort (48)
+                              +- Exchange (47)
+                                 +- SortAggregate (46)
+                                    +- Sort (45)
+                                       +- HashAggregate (44)
+                                          +- Exchange (43)
+                                             +- HashAggregate (42)
+                                                +- Filter (41)
+                                                   +- Scan csv  (23)
+
+
+(1) InMemoryTableScan
+Output [10]: [olay_zamani#291, tarih#764, saat_tr#765, yontem#2, rota#766, durum#4, bayt#5L, sure_ms#6, ulke#767, kurum_turu#768]
+Arguments: [olay_zamani#291, tarih#764, saat_tr#765, yontem#2, rota#766, durum#4, bayt#5L, sure_ms#6, ulke#767, kurum_turu#768]
+
+(2) InMemoryRelation
+Arguments: [olay_zamani#291, tarih#764, saat_tr#765, yontem#2, rota#766, durum#4, bayt#5L, sure_ms#6, ulke#767, kurum_turu#768], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@43d9c7b0,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(4) Project [olay_zamani#291, cast(from_utc_timestamp(olay_zamani#291, Europe/Istanbul) as date) AS tarih#764, hour(from_utc_timestamp(olay_zamani#291, Europe/Istanbul), Some(UTC)) AS saat_tr#765, yontem#2, regexp_replace(yol#300, ^(/urun|/api/stok)/[0-9]+$, $1/{id}, 1) AS rota#766, durum#4, bayt#5L, sure_ms#6, CASE WHEN (eslesme#744L = 1) THEN ulke#746 ELSE belirsiz END AS ulke#767, CASE WHEN (eslesme#744L = 1) THEN kurum_turu#748 ELSE belirsiz END AS kurum_turu#768]
+   +- *(4) BroadcastHashJoin [ip#1], [ip#730], LeftOuter, BuildRight, false
+      :- TableCacheQueryStage 0
+      :  +- InMemoryTableScan [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6]
+      :        +- InMemoryRelation [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+      :              +- AdaptiveSparkPlan isFinalPlan=true
+                     +- == Final Plan ==
+                        *(1) Project [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+                        +- *(1) Filter ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+                           +- TableCacheQueryStage 0
+                              +- InMemoryTableScan [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2], [isnotnull(durum#4), isnotnull(bayt#5L), isnotnull(sure_ms#6), atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7), (length(trim(ip#1, None)) > 0), (length(trim(yontem#2, None)) > 0), (length(trim(yol#3, None)) > 0), (length(trim(ajan#7, None)) > 0), (durum#4 >= 100), (durum#4 <= 599), (bayt#5L >= 0), (sure_ms#6 >= 0.0), (sure_ms#6 <= 1.7976931348623157E308)]
+                                    +- InMemoryRelation [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+                                          +- AdaptiveSparkPlan isFinalPlan=true
+                     +- == Final Plan ==
+                        *(2) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                        +- ShuffleQueryStage 0
+                           +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+                              +- *(1) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                                 +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                     +- == Initial Plan ==
+                        HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                        +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+                           +- HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                              +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                     +- == Initial Plan ==
+                        Project [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+                        +- Filter ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+                           +- InMemoryTableScan [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2], [isnotnull(durum#4), isnotnull(bayt#5L), isnotnull(sure_ms#6), atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7), (length(trim(ip#1, None)) > 0), (length(trim(yontem#2, None)) > 0), (length(trim(yol#3, None)) > 0), (length(trim(ajan#7, None)) > 0), (durum#4 >= 100), (durum#4 <= 599), (bayt#5L >= 0), (sure_ms#6 >= 0.0), (sure_ms#6 <= 1.7976931348623157E308)]
+                                 +- InMemoryRelation [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+                                       +- AdaptiveSparkPlan isFinalPlan=true
+                  +- == Final Plan ==
+                     *(2) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                     +- ShuffleQueryStage 0
+                        +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+                           +- *(1) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                              +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                  +- == Initial Plan ==
+                     HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                     +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+                        +- HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                           +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+      +- BroadcastQueryStage 3
+         +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=404]
+            +- SortAggregate(key=[ip#730], functions=[count(1), min(ulke#731), min(kurum_turu#732)], output=[ip#730, eslesme#744L, ulke#746, kurum_turu#748])
+               +- *(3) Sort [ip#730 ASC NULLS FIRST], false, 0
+                  +- AQEShuffleRead coalesced
+                     +- ShuffleQueryStage 2
+                        +- Exchange hashpartitioning(ip#730, 8), ENSURE_REQUIREMENTS, [plan_id=361]
+                           +- SortAggregate(key=[ip#730], functions=[partial_count(1), partial_min(ulke#731), partial_min(kurum_turu#732)], output=[ip#730, count#902L, min#903, min#904])
+                              +- *(2) Sort [ip#730 ASC NULLS FIRST], false, 0
+                                 +- *(2) HashAggregate(keys=[ip#730, ulke#731, kurum_turu#732], functions=[], output=[ip#730, ulke#731, kurum_turu#732])
+                                    +- AQEShuffleRead coalesced
+                                       +- ShuffleQueryStage 1
+                                          +- Exchange hashpartitioning(ip#730, ulke#731, kurum_turu#732, 8), ENSURE_REQUIREMENTS, [plan_id=271]
+                                             +- *(1) HashAggregate(keys=[ip#730, ulke#731, kurum_turu#732], functions=[], output=[ip#730, ulke#731, kurum_turu#732])
+                                                +- *(1) Filter (atleastnnonnulls(3, ip#730, ulke#731, kurum_turu#732) AND isnotnull(ip#730))
+                                                   +- FileScan csv [ip#730,ulke#731,kurum_turu#732] Batched: false, DataFilters: [atleastnnonnulls(3, ip#730, ulke#731, kurum_turu#732), isnotnull(ip#730)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/boyut/log/ip_bilgisi.csv], PartitionFilters: [], PushedFilters: [IsNotNull(ip)], ReadSchema: struct<ip:string,ulke:string,kurum_turu:string>
++- == Initial Plan ==
+   Project [olay_zamani#291, cast(from_utc_timestamp(olay_zamani#291, Europe/Istanbul) as date) AS tarih#764, hour(from_utc_timestamp(olay_zamani#291, Europe/Istanbul), Some(UTC)) AS saat_tr#765, yontem#2, regexp_replace(yol#300, ^(/urun|/api/stok)/[0-9]+$, $1/{id}, 1) AS rota#766, durum#4, bayt#5L, sure_ms#6, CASE WHEN (eslesme#744L = 1) THEN ulke#746 ELSE belirsiz END AS ulke#767, CASE WHEN (eslesme#744L = 1) THEN kurum_turu#748 ELSE belirsiz END AS kurum_turu#768]
+   +- BroadcastHashJoin [ip#1], [ip#730], LeftOuter, BuildRight, false
+      :- InMemoryTableScan [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6]
+      :     +- InMemoryRelation [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+      :           +- AdaptiveSparkPlan isFinalPlan=true
+                  +- == Final Plan ==
+                     *(1) Project [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+                     +- *(1) Filter ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+                        +- TableCacheQueryStage 0
+                           +- InMemoryTableScan [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2], [isnotnull(durum#4), isnotnull(bayt#5L), isnotnull(sure_ms#6), atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7), (length(trim(ip#1, None)) > 0), (length(trim(yontem#2, None)) > 0), (length(trim(yol#3, None)) > 0), (length(trim(ajan#7, None)) > 0), (durum#4 >= 100), (durum#4 <= 599), (bayt#5L >= 0), (sure_ms#6 >= 0.0), (sure_ms#6 <= 1.7976931348623157E308)]
+                                 +- InMemoryRelation [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+                                       +- AdaptiveSparkPlan isFinalPlan=true
+                     +- == Final Plan ==
+                        *(2) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                        +- ShuffleQueryStage 0
+                           +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+                              +- *(1) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                                 +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                     +- == Initial Plan ==
+                        HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                        +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+                           +- HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                              +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                  +- == Initial Plan ==
+                     Project [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+                     +- Filter ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+                        +- InMemoryTableScan [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2], [isnotnull(durum#4), isnotnull(bayt#5L), isnotnull(sure_ms#6), atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7), (length(trim(ip#1, None)) > 0), (length(trim(yontem#2, None)) > 0), (length(trim(yol#3, None)) > 0), (length(trim(ajan#7, None)) > 0), (durum#4 >= 100), (durum#4 <= 599), (bayt#5L >= 0), (sure_ms#6 >= 0.0), (sure_ms#6 <= 1.7976931348623157E308)]
+                              +- InMemoryRelation [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+                                    +- AdaptiveSparkPlan isFinalPlan=true
+                  +- == Final Plan ==
+                     *(2) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                     +- ShuffleQueryStage 0
+                        +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+                           +- *(1) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                              +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                  +- == Initial Plan ==
+                     HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                     +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+                        +- HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                           +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+      +- BroadcastExchange HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=222]
+         +- SortAggregate(key=[ip#730], functions=[count(1), min(ulke#731), min(kurum_turu#732)], output=[ip#730, eslesme#744L, ulke#746, kurum_turu#748])
+            +- Sort [ip#730 ASC NULLS FIRST], false, 0
+               +- Exchange hashpartitioning(ip#730, 8), ENSURE_REQUIREMENTS, [plan_id=218]
+                  +- SortAggregate(key=[ip#730], functions=[partial_count(1), partial_min(ulke#731), partial_min(kurum_turu#732)], output=[ip#730, count#902L, min#903, min#904])
+                     +- Sort [ip#730 ASC NULLS FIRST], false, 0
+                        +- HashAggregate(keys=[ip#730, ulke#731, kurum_turu#732], functions=[], output=[ip#730, ulke#731, kurum_turu#732])
+                           +- Exchange hashpartitioning(ip#730, ulke#731, kurum_turu#732, 8), ENSURE_REQUIREMENTS, [plan_id=212]
+                              +- HashAggregate(keys=[ip#730, ulke#731, kurum_turu#732], functions=[], output=[ip#730, ulke#731, kurum_turu#732])
+                                 +- Filter (atleastnnonnulls(3, ip#730, ulke#731, kurum_turu#732) AND isnotnull(ip#730))
+                                    +- FileScan csv [ip#730,ulke#731,kurum_turu#732] Batched: false, DataFilters: [atleastnnonnulls(3, ip#730, ulke#731, kurum_turu#732), isnotnull(ip#730)], Format: CSV, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/boyut/log/ip_bilgisi.csv], PartitionFilters: [], PushedFilters: [IsNotNull(ip)], ReadSchema: struct<ip:string,ulke:string,kurum_turu:string>
+,None)
+
+(3) InMemoryTableScan
+Output [7]: [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6]
+Arguments: [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6]
+
+(4) InMemoryRelation
+Arguments: [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@43d9c7b0,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(1) Project [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+   +- *(1) Filter ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+      +- TableCacheQueryStage 0
+         +- InMemoryTableScan [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2], [isnotnull(durum#4), isnotnull(bayt#5L), isnotnull(sure_ms#6), atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7), (length(trim(ip#1, None)) > 0), (length(trim(yontem#2, None)) > 0), (length(trim(yol#3, None)) > 0), (length(trim(ajan#7, None)) > 0), (durum#4 >= 100), (durum#4 <= 599), (bayt#5L >= 0), (sure_ms#6 >= 0.0), (sure_ms#6 <= 1.7976931348623157E308)]
+               +- InMemoryRelation [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+                     +- AdaptiveSparkPlan isFinalPlan=true
+                     +- == Final Plan ==
+                        *(2) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                        +- ShuffleQueryStage 0
+                           +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+                              +- *(1) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                                 +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                     +- == Initial Plan ==
+                        HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                        +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+                           +- HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                              +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
++- == Initial Plan ==
+   Project [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+   +- Filter ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+      +- InMemoryTableScan [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2], [isnotnull(durum#4), isnotnull(bayt#5L), isnotnull(sure_ms#6), atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7), (length(trim(ip#1, None)) > 0), (length(trim(yontem#2, None)) > 0), (length(trim(yol#3, None)) > 0), (length(trim(ajan#7, None)) > 0), (durum#4 >= 100), (durum#4 <= 599), (bayt#5L >= 0), (sure_ms#6 >= 0.0), (sure_ms#6 <= 1.7976931348623157E308)]
+            +- InMemoryRelation [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7], StorageLevel(disk, memory, deserialized, 1 replicas)
+                  +- AdaptiveSparkPlan isFinalPlan=true
+                  +- == Final Plan ==
+                     *(2) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                     +- ShuffleQueryStage 0
+                        +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+                           +- *(1) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                              +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+                  +- == Initial Plan ==
+                     HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+                     +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+                        +- HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+                           +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+,None)
+
+(5) InMemoryTableScan
+Output [8]: [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2]
+Arguments: [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2], [isnotnull(durum#4), isnotnull(bayt#5L), isnotnull(sure_ms#6), atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7), (length(trim(ip#1, None)) > 0), (length(trim(yontem#2, None)) > 0), (length(trim(yol#3, None)) > 0), (length(trim(ajan#7, None)) > 0), (durum#4 >= 100), (durum#4 <= 599), (bayt#5L >= 0), (sure_ms#6 >= 0.0), (sure_ms#6 <= 1.7976931348623157E308)]
+
+(6) InMemoryRelation
+Arguments: [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7], CachedRDDBuilder(org.apache.spark.sql.execution.columnar.DefaultCachedBatchSerializer@43d9c7b0,StorageLevel(disk, memory, deserialized, 1 replicas),AdaptiveSparkPlan isFinalPlan=true
++- == Final Plan ==
+   *(2) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+   +- ShuffleQueryStage 0
+      +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+         +- *(1) HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+            +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
++- == Initial Plan ==
+   HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7])
+   +- Exchange hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+      +- HashAggregate(keys=[ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3], functions=[], output=[ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3])
+         +- FileScan json [olay_zamani#0,ip#1,yontem#2,yol#3,durum#4,bayt#5L,sure_ms#6,ajan#7] Batched: false, DataFilters: [], Format: JSON, Location: InMemoryFileIndex(1 paths)[file:/tmp/bsm461-pilot-20261118/ham/log], PartitionFilters: [], PushedFilters: [], ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double...
+,None)
+
+(7) Scan json 
+Output [8]: [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7]
+Batched: false
+Location: InMemoryFileIndex [file:/tmp/bsm461-pilot-20261118/ham/log]
+ReadSchema: struct<olay_zamani:string,ip:string,yontem:string,yol:string,durum:int,bayt:bigint,sure_ms:double,ajan:string>
+
+(8) HashAggregate [codegen id : 1]
+Input [8]: [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7]
+Keys [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3]
+Functions: []
+Aggregate Attributes: []
+Results [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+
+(9) Exchange
+Input [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+Arguments: hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=72]
+
+(10) ShuffleQueryStage
+Output [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+Arguments: 0
+
+(11) HashAggregate [codegen id : 2]
+Input [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+Keys [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+Functions: []
+Aggregate Attributes: []
+Results [8]: [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7]
+
+(12) HashAggregate
+Input [8]: [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7]
+Keys [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, knownfloatingpointnormalized(normalizenanandzero(sure_ms#6)) AS sure_ms#6, durum#4, ajan#7, yol#3]
+Functions: []
+Aggregate Attributes: []
+Results [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+
+(13) Exchange
+Input [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+Arguments: hashpartitioning(ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3, 8), ENSURE_REQUIREMENTS, [plan_id=41]
+
+(14) HashAggregate
+Input [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+Keys [8]: [ip#1, bayt#5L, olay_zamani#0, yontem#2, sure_ms#6, durum#4, ajan#7, yol#3]
+Functions: []
+Aggregate Attributes: []
+Results [8]: [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7]
+
+(15) AdaptiveSparkPlan
+Output [8]: [olay_zamani#0, ip#1, yontem#2, yol#3, durum#4, bayt#5L, sure_ms#6, ajan#7]
+Arguments: isFinalPlan=true
+
+(16) TableCacheQueryStage
+Output [8]: [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2]
+Arguments: 0
+
+(17) Filter [codegen id : 1]
+Input [8]: [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2]
+Condition : ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+
+(18) Project [codegen id : 1]
+Output [8]: [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+Input [8]: [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2]
+
+(19) Filter
+Input [8]: [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2]
+Condition : ((((((((((((isnotnull(durum#4) AND isnotnull(bayt#5L)) AND isnotnull(sure_ms#6)) AND atleastnnonnulls(8, cast(olay_zamani#0 as timestamp), ip#1, yontem#2, trim(yol#3, None), durum#4, bayt#5L, sure_ms#6, ajan#7)) AND (length(trim(ip#1, None)) > 0)) AND (length(trim(yontem#2, None)) > 0)) AND (length(trim(yol#3, None)) > 0)) AND (length(trim(ajan#7, None)) > 0)) AND (durum#4 >= 100)) AND (durum#4 <= 599)) AND (bayt#5L >= 0)) AND (sure_ms#6 >= 0.0)) AND (sure_ms#6 <= 1.7976931348623157E308))
+
+(20) Project
+Output [8]: [cast(olay_zamani#0 as timestamp) AS olay_zamani#291, ip#1, yontem#2, trim(yol#3, None) AS yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+Input [8]: [ajan#7, bayt#5L, durum#4, ip#1, olay_zamani#0, sure_ms#6, yol#3, yontem#2]
+
+(21) AdaptiveSparkPlan
+Output [8]: [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6, ajan#7]
+Arguments: isFinalPlan=true
+
+(22) TableCacheQueryStage
+Output [7]: [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6]
+Arguments: 0
+
+(23) Scan csv 
+Output [3]: [ip#730, ulke#731, kurum_turu#732]
+Batched: false
+Location: InMemoryFileIndex [file:/tmp/bsm461-pilot-20261118/ham/boyut/log/ip_bilgisi.csv]
+PushedFilters: [IsNotNull(ip)]
+ReadSchema: struct<ip:string,ulke:string,kurum_turu:string>
+
+(24) Filter [codegen id : 1]
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Condition : (atleastnnonnulls(3, ip#730, ulke#731, kurum_turu#732) AND isnotnull(ip#730))
+
+(25) HashAggregate [codegen id : 1]
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Keys [3]: [ip#730, ulke#731, kurum_turu#732]
+Functions: []
+Aggregate Attributes: []
+Results [3]: [ip#730, ulke#731, kurum_turu#732]
+
+(26) Exchange
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Arguments: hashpartitioning(ip#730, ulke#731, kurum_turu#732, 8), ENSURE_REQUIREMENTS, [plan_id=271]
+
+(27) ShuffleQueryStage
+Output [3]: [ip#730, ulke#731, kurum_turu#732]
+Arguments: 1
+
+(28) AQEShuffleRead
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Arguments: coalesced
+
+(29) HashAggregate [codegen id : 2]
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Keys [3]: [ip#730, ulke#731, kurum_turu#732]
+Functions: []
+Aggregate Attributes: []
+Results [3]: [ip#730, ulke#731, kurum_turu#732]
+
+(30) Sort [codegen id : 2]
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Arguments: [ip#730 ASC NULLS FIRST], false, 0
+
+(31) SortAggregate
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Keys [1]: [ip#730]
+Functions [3]: [partial_count(1), partial_min(ulke#731), partial_min(kurum_turu#732)]
+Aggregate Attributes [3]: [count#899L, min#900, min#901]
+Results [4]: [ip#730, count#902L, min#903, min#904]
+
+(32) Exchange
+Input [4]: [ip#730, count#902L, min#903, min#904]
+Arguments: hashpartitioning(ip#730, 8), ENSURE_REQUIREMENTS, [plan_id=361]
+
+(33) ShuffleQueryStage
+Output [4]: [ip#730, count#902L, min#903, min#904]
+Arguments: 2
+
+(34) AQEShuffleRead
+Input [4]: [ip#730, count#902L, min#903, min#904]
+Arguments: coalesced
+
+(35) Sort [codegen id : 3]
+Input [4]: [ip#730, count#902L, min#903, min#904]
+Arguments: [ip#730 ASC NULLS FIRST], false, 0
+
+(36) SortAggregate
+Input [4]: [ip#730, count#902L, min#903, min#904]
+Keys [1]: [ip#730]
+Functions [3]: [count(1), min(ulke#731), min(kurum_turu#732)]
+Aggregate Attributes [3]: [count(1)#743L, min(ulke#731)#745, min(kurum_turu#732)#747]
+Results [4]: [ip#730, count(1)#743L AS eslesme#744L, min(ulke#731)#745 AS ulke#746, min(kurum_turu#732)#747 AS kurum_turu#748]
+
+(37) BroadcastExchange
+Input [4]: [ip#730, eslesme#744L, ulke#746, kurum_turu#748]
+Arguments: HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=404]
+
+(38) BroadcastQueryStage
+Output [4]: [ip#730, eslesme#744L, ulke#746, kurum_turu#748]
+Arguments: 3
+
+(39) BroadcastHashJoin [codegen id : 4]
+Left keys [1]: [ip#1]
+Right keys [1]: [ip#730]
+Join type: LeftOuter
+Join condition: None
+
+(40) Project [codegen id : 4]
+Output [10]: [olay_zamani#291, cast(from_utc_timestamp(olay_zamani#291, Europe/Istanbul) as date) AS tarih#764, hour(from_utc_timestamp(olay_zamani#291, Europe/Istanbul), Some(UTC)) AS saat_tr#765, yontem#2, regexp_replace(yol#300, ^(/urun|/api/stok)/[0-9]+$, $1/{id}, 1) AS rota#766, durum#4, bayt#5L, sure_ms#6, CASE WHEN (eslesme#744L = 1) THEN ulke#746 ELSE belirsiz END AS ulke#767, CASE WHEN (eslesme#744L = 1) THEN kurum_turu#748 ELSE belirsiz END AS kurum_turu#768]
+Input [11]: [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6, ip#730, eslesme#744L, ulke#746, kurum_turu#748]
+
+(41) Filter
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Condition : (atleastnnonnulls(3, ip#730, ulke#731, kurum_turu#732) AND isnotnull(ip#730))
+
+(42) HashAggregate
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Keys [3]: [ip#730, ulke#731, kurum_turu#732]
+Functions: []
+Aggregate Attributes: []
+Results [3]: [ip#730, ulke#731, kurum_turu#732]
+
+(43) Exchange
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Arguments: hashpartitioning(ip#730, ulke#731, kurum_turu#732, 8), ENSURE_REQUIREMENTS, [plan_id=212]
+
+(44) HashAggregate
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Keys [3]: [ip#730, ulke#731, kurum_turu#732]
+Functions: []
+Aggregate Attributes: []
+Results [3]: [ip#730, ulke#731, kurum_turu#732]
+
+(45) Sort
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Arguments: [ip#730 ASC NULLS FIRST], false, 0
+
+(46) SortAggregate
+Input [3]: [ip#730, ulke#731, kurum_turu#732]
+Keys [1]: [ip#730]
+Functions [3]: [partial_count(1), partial_min(ulke#731), partial_min(kurum_turu#732)]
+Aggregate Attributes [3]: [count#899L, min#900, min#901]
+Results [4]: [ip#730, count#902L, min#903, min#904]
+
+(47) Exchange
+Input [4]: [ip#730, count#902L, min#903, min#904]
+Arguments: hashpartitioning(ip#730, 8), ENSURE_REQUIREMENTS, [plan_id=218]
+
+(48) Sort
+Input [4]: [ip#730, count#902L, min#903, min#904]
+Arguments: [ip#730 ASC NULLS FIRST], false, 0
+
+(49) SortAggregate
+Input [4]: [ip#730, count#902L, min#903, min#904]
+Keys [1]: [ip#730]
+Functions [3]: [count(1), min(ulke#731), min(kurum_turu#732)]
+Aggregate Attributes [3]: [count(1)#743L, min(ulke#731)#745, min(kurum_turu#732)#747]
+Results [4]: [ip#730, count(1)#743L AS eslesme#744L, min(ulke#731)#745 AS ulke#746, min(kurum_turu#732)#747 AS kurum_turu#748]
+
+(50) BroadcastExchange
+Input [4]: [ip#730, eslesme#744L, ulke#746, kurum_turu#748]
+Arguments: HashedRelationBroadcastMode(List(input[0, string, true]),false), [plan_id=222]
+
+(51) BroadcastHashJoin
+Left keys [1]: [ip#1]
+Right keys [1]: [ip#730]
+Join type: LeftOuter
+Join condition: None
+
+(52) Project
+Output [10]: [olay_zamani#291, cast(from_utc_timestamp(olay_zamani#291, Europe/Istanbul) as date) AS tarih#764, hour(from_utc_timestamp(olay_zamani#291, Europe/Istanbul), Some(UTC)) AS saat_tr#765, yontem#2, regexp_replace(yol#300, ^(/urun|/api/stok)/[0-9]+$, $1/{id}, 1) AS rota#766, durum#4, bayt#5L, sure_ms#6, CASE WHEN (eslesme#744L = 1) THEN ulke#746 ELSE belirsiz END AS ulke#767, CASE WHEN (eslesme#744L = 1) THEN kurum_turu#748 ELSE belirsiz END AS kurum_turu#768]
+Input [11]: [olay_zamani#291, ip#1, yontem#2, yol#300, durum#4, bayt#5L, sure_ms#6, ip#730, eslesme#744L, ulke#746, kurum_turu#748]
+
+(53) AdaptiveSparkPlan
+Output [10]: [olay_zamani#291, tarih#764, saat_tr#765, yontem#2, rota#766, durum#4, bayt#5L, sure_ms#6, ulke#767, kurum_turu#768]
+Arguments: isFinalPlan=true
+
+(54) AdaptiveSparkPlan
+Output [10]: [olay_zamani#291, tarih#764, saat_tr#765, yontem#2, rota#766, durum#4, bayt#5L, sure_ms#6, ulke#767, kurum_turu#768]
+Arguments: isFinalPlan=false
+
+Delta tablo üzerinde ilk 10 rota
+== Physical Plan ==
+AdaptiveSparkPlan (9)
++- TakeOrderedAndProject (8)
+   +- Project (7)
+      +- Filter (6)
+         +- HashAggregate (5)
+            +- Exchange (4)
+               +- HashAggregate (3)
+                  +- Project (2)
+                     +- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [3]: [rota#2429, durum#2430, tarih#2426]
+Batched: true
+Location: PreparedDeltaFileIndex [file:/tmp/bsm461-pilot-20261118/delta]
+ReadSchema: struct<rota:string,durum:int>
+
+(2) Project
+Output [2]: [rota#2429, durum#2430]
+Input [3]: [rota#2429, durum#2430, tarih#2426]
+
+(3) HashAggregate
+Input [2]: [rota#2429, durum#2430]
+Keys [1]: [rota#2429]
+Functions [2]: [partial_count(1), partial_count(CASE WHEN ((durum#2430 >= 500) AND (durum#2430 <= 599)) THEN 1 END)]
+Aggregate Attributes [2]: [count#3095L, count#3096L]
+Results [3]: [rota#2429, count#3097L, count#3098L]
+
+(4) Exchange
+Input [3]: [rota#2429, count#3097L, count#3098L]
+Arguments: hashpartitioning(rota#2429, 8), ENSURE_REQUIREMENTS, [plan_id=901]
+
+(5) HashAggregate
+Input [3]: [rota#2429, count#3097L, count#3098L]
+Keys [1]: [rota#2429]
+Functions [2]: [count(1), count(CASE WHEN ((durum#2430 >= 500) AND (durum#2430 <= 599)) THEN 1 END)]
+Aggregate Attributes [2]: [count(1)#2965L, count(CASE WHEN ((durum#2430 >= 500) AND (durum#2430 <= 599)) THEN 1 END)#2967L]
+Results [3]: [rota#2429, count(1)#2965L AS istek#2966L, count(CASE WHEN ((durum#2430 >= 500) AND (durum#2430 <= 599)) THEN 1 END)#2967L AS hata_5xx#2968L]
+
+(6) Filter
+Input [3]: [rota#2429, istek#2966L, hata_5xx#2968L]
+Condition : (hata_5xx#2968L > 0)
+
+(7) Project
+Output [4]: [rota#2429, istek#2966L, hata_5xx#2968L, round(((cast(hata_5xx#2968L as double) * 100.0) / cast(istek#2966L as double)), 2) AS hata_yuzde#2972]
+Input [3]: [rota#2429, istek#2966L, hata_5xx#2968L]
+
+(8) TakeOrderedAndProject
+Input [4]: [rota#2429, istek#2966L, hata_5xx#2968L, hata_yuzde#2972]
+Arguments: 10, [hata_5xx#2968L DESC NULLS LAST, rota#2429 ASC NULLS FIRST], [rota#2429, istek#2966L, hata_5xx#2968L, hata_yuzde#2972]
+
+(9) AdaptiveSparkPlan
+Output [4]: [rota#2429, istek#2966L, hata_5xx#2968L, hata_yuzde#2972]
+Arguments: isFinalPlan=false
+
+Parquet üzerinde tarih filtreli 5xx sorgusu
+== Physical Plan ==
+AdaptiveSparkPlan (7)
++- HashAggregate (6)
+   +- Exchange (5)
+      +- HashAggregate (4)
+         +- Project (3)
+            +- Filter (2)
+               +- Scan parquet  (1)
+
+
+(1) Scan parquet 
+Output [3]: [rota#3323, durum#3324, tarih#3329]
+Batched: true
+Location: InMemoryFileIndex [file:/tmp/bsm461-pilot-20261118/parquet]
+PartitionFilters: [isnotnull(tarih#3329), (tarih#3329 = 2026-11-18)]
+PushedFilters: [IsNotNull(durum), GreaterThanOrEqual(durum,500), LessThanOrEqual(durum,599)]
+ReadSchema: struct<rota:string,durum:int>
+
+(2) Filter
+Input [3]: [rota#3323, durum#3324, tarih#3329]
+Condition : ((isnotnull(durum#3324) AND (durum#3324 >= 500)) AND (durum#3324 <= 599))
+
+(3) Project
+Output [1]: [rota#3323]
+Input [3]: [rota#3323, durum#3324, tarih#3329]
+
+(4) HashAggregate
+Input [1]: [rota#3323]
+Keys [1]: [rota#3323]
+Functions [1]: [partial_count(1)]
+Aggregate Attributes [1]: [count#3372L]
+Results [2]: [rota#3323, count#3373L]
+
+(5) Exchange
+Input [2]: [rota#3323, count#3373L]
+Arguments: hashpartitioning(rota#3323, 8), ENSURE_REQUIREMENTS, [plan_id=1128]
+
+(6) HashAggregate
+Input [2]: [rota#3323, count#3373L]
+Keys [1]: [rota#3323]
+Functions [1]: [count(1)]
+Aggregate Attributes [1]: [count(1)#3368L]
+Results [2]: [rota#3323, count(1)#3368L AS count#3369L]
+
+(7) AdaptiveSparkPlan
+Output [2]: [rota#3323, count#3369L]
+Arguments: isFinalPlan=false

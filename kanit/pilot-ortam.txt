@@ -1,0 +1,9 @@
+BSM461 · B201210555 · Koray'ın çalışma alanında yerel pilot · 25.11.2026
+İşletim sistemi: Linux Mint 22 (Wilma)
+İşlemci: Intel Core i9-13900H, işletim sisteminin gördüğü 20 mantıksal işlemci
+Bellek: 15.711 MiB (free -m)
+Yerel disk: df -B1 --output=size,avail .
+1B-blocks        Avail
+347346604032 183113961472
+Java: OpenJDK 17.0.18
+Ham pilot: analiz/pilot_veri.py, grup B201210555, 10.000 satır, 7 gün, ilk hariç UTC günü 2026-11-18

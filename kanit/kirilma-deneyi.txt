@@ -1,0 +1,29 @@
+BSM461 · B201210555 · Z11 deney kaynakları
+
+1. Yüksel · Windows / Docker Compose · 18 Kasım 2026
+Kaynak: kanit/yuksel/delta-parquet-canli-kesinti.txt (komutları ve Ctrl+C satırlarını içerir).
+Hazırla: üzerine yazma kaynağı 3.010.000 ham satır. Delta sürüm 0 ve normal Parquet ayrı ayrı 1.000 satırla başladı.
+Tetik: her biçim için Spark yazma görevi başladıktan sonra terminalden Ctrl+C.
+Kontrol: Delta sürüm 0, okunabilen 1.000 satır.
+Kontrol: normal Parquet, [UNABLE_TO_INFER_SCHEMA] Unable to infer schema for Parquet. It must be specified manually.
+Ayrı kesinti deneyi: kanit/yuksel/delta-atomik-yazma.txt. Kasıtlı görev istisnasından önce ve sonra Delta sürüm 0, 9.959 satır.
+
+2. Koray · Linux Mint / Docker Compose · 17 Kasım 2026
+Kaynak: kanit/uyari-gonderim.txt ve kanit/uyari-akis.log.
+Tetik: Kafka tarafından onaylanan 50 sentetik 503 olayı.
+Kafka onayı: 1794931398.061 s (Unix epoch).
+İlk 5xx uyarısı: 1794931419.924 s (Unix epoch), aynı pencerede 50/50 hata.
+Onaydan konsol uyarısına: 1794931419.924 − 1794931398.061 = 21,863 s (bir koşu).
+Spark uyarıları: 5.000 ms tetik aralığına karşı 9.826 ve 11.749 ms mikro-yığın süreleri.
+Sonuç: bu koşuda 30 s hedefi karşılandı. Spark tetik aralığının aşılması, kapasite ve gecikme riskini gösterir.
+Bu koşu gerçek ölçekli tepe yük kırılmasını ölçmez.
+
+3. Tek Kafka 4.0.0 düğümünü durdurma · Koray'ın Linux Mint çalışma alanı · 25 Kasım 2026
+Geçici yerel akış pilotunun brokerı 127.0.0.1:19092 adresinde çalıştı. Broker tek süreç ve bir kopyaydı.
+Önce · Konu erişilebilir | bölüm: 8
+Yalnızca pilotun Kafka süreci TERM sinyaliyle durduruldu.
+Broker dururken · Konu erişilemiyor | KafkaError{code=_TRANSPORT,val=-195,str="Failed to get metadata: Local: Broker transport failure"}
+Aynı veri diziniyle yeniden başlatma denendi. İlk metadata yoklamasında yine _TRANSPORT alındı.
+Sonraki açılışta Kafka Server started satırı beklendi. kafka-get-offsets.sh sekiz bölüm için başarılı döndü.
+Bölüm uç ofsetleri toplamı: 221
+Bu toplam, kesintiden önceki yerel akış deneyi girdilerinin toplamına eşit. Deney sırasında veri dizini korunmuştur.

@@ -315,10 +315,12 @@ def akis(a, olay, anahtar, r):
     print(f"✓ toplam {gonderilen:,} olay".replace(",", "."))
 
 
-def toplu(a, olay, r):
-    istemci = s3()
+def toplu(a, olay, r, *, istemci=None, bitis=None):
+    if istemci is None:
+        istemci = s3()
     gun_sayisi = a.gun
-    bitis = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
+    if bitis is None:
+        bitis = datetime.now(timezone.utc).replace(hour=0, minute=0, second=0, microsecond=0)
     gunler = [bitis - timedelta(days=g) for g in range(gun_sayisi, 0, -1)]
     g = veri_ayarlari(a.grup, a.sablon)
     gun_ag = g.get("gun_agirlik", [1.0] * 7)                           # Pzt…Paz

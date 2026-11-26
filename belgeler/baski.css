@@ -1,0 +1,43 @@
+@page rapor {
+    size: A4;
+    margin: 17mm 17mm 19mm;
+    @top-left { content: "BSM461  ·  B201210555"; color: #486074; font: 11pt "DejaVu Sans"; }
+    @bottom-right { content: counter(page); color: #486074; font: 11pt "DejaVu Sans"; }
+}
+@page sunum {
+    size: 320mm 180mm;
+    margin: 11mm 16mm 11mm;
+    @bottom-right { content: counter(page); color: #486074; font: 11pt "DejaVu Sans"; }
+}
+body { font-family: "DejaVu Sans", sans-serif; color: #172c3f; }
+a { color: #1b6571; }
+section + section { break-before: page; }
+img { display: block; max-width: 100%; object-fit: contain; }
+table { width: 100%; border-collapse: collapse; margin: 0.6em 0 1.1em; }
+thead { display: table-header-group; }
+th, td { text-align: left; vertical-align: top; padding: 0.48em 0.55em; }
+th { background: #dcebf0; color: #163e4a; }
+tbody tr:nth-child(odd) { background: #f2f6f9; }
+tbody tr { break-inside: avoid; }
+h1, h2, h3 { line-height: 1.19; break-after: avoid; }
+code { font-family: "DejaVu Sans Mono", monospace; color: #163e4a; overflow-wrap: anywhere; }
+pre { white-space: pre-wrap; break-inside: avoid; }
+p { orphans: 3; widows: 3; }
+
+.rapor { page: rapor; font-size: 11pt; line-height: 1.39; }
+.rapor h1 { font-size: 26pt; margin-top: 26mm; }
+.rapor h2 { font-size: 17pt; margin: 1.25em 0 0.55em; border-bottom: 1px solid #9cbec7; padding-bottom: 0.24em; }
+.rapor h3 { font-size: 13pt; margin: 1.1em 0 0.45em; }
+.rapor p { margin: 0.55em 0; }
+.rapor p:has(img) { break-after: avoid; }
+.rapor img { width: 100%; max-height: 87mm; }
+.rapor table { line-height: 1.27; }
+
+.sunum { page: sunum; font-size: 19pt; line-height: 1.31; }
+.sunum h1 { font-size: 35pt; margin: 0 0 0.24em; color: #172c3f; }
+.sunum p { margin: 0.48em 0; }
+.sunum h1 + p { color: #1b6571; margin-top: 0; }
+.sunum li { margin: 0.56em 0; }
+.sunum img { max-height: 88mm; margin: 0 auto; }
+.sunum section:first-child img { width: 100%; max-height: 101mm; }
+.sunum table { font-size: 18pt; }
