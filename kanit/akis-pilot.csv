@@ -1,0 +1,5 @@
+evre,yeni_kafka_satiri,yeni_benzersiz,beklenen_temiz_toplam,temiz_toplam,pencere_toplam
+gec_0_ve_tekrar,101,100,100,100,100
+ayni_checkpoint_yeni_girdi_yok,0,0,100,100,100
+gec_30_sinir_ici,100,100,200,200,200
+gec_50_sinir_disi,20,20,210,210,210

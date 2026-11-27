@@ -1,5 +1,9 @@
 """BSM461 web logları için toplu Spark işi."""
 
+import argparse
+import csv
+from pathlib import Path
+
 from pyspark.sql import SparkSession, functions as F
 
 
@@ -15,14 +19,27 @@ LOG_SEMASI = """
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--ham", default=HAM)
+    parser.add_argument("--ip-bilgisi", default=IP_BILGISI)
+    parser.add_argument("--parquet", default=PARQUET)
+    parser.add_argument("--delta", default=DELTA)
+    parser.add_argument("--analiz-cikti", type=Path, help="Küçültülmüş sorgu CSV'lerinin yerel dizini")
+    args = parser.parse_args()
     spark = (
         SparkSession.builder.appName("BSM461-toplu-log")
         .config("spark.sql.session.timeZone", "UTC")
         .getOrCreate()
     )
     spark.sparkContext.setLogLevel("WARN")
+    try:
+        toplu_isle(spark, args)
+    finally:
+        spark.stop()
 
-    ham = spark.read.schema(LOG_SEMASI).option("recursiveFileLookup", "true").json(HAM)
+
+def toplu_isle(spark, args):
+    ham = spark.read.schema(LOG_SEMASI).option("recursiveFileLookup", "true").json(args.ham)
     ham_adet = ham.count()
     tekil = ham.dropDuplicates().cache()
     tekil_adet = tekil.count()
@@ -52,7 +69,7 @@ def main():
     ip_bilgisi = (
         spark.read.option("header", "true")
         .schema("ip STRING, ulke STRING, kurum_turu STRING")
-        .csv(IP_BILGISI).dropna().dropDuplicates()
+        .csv(args.ip_bilgisi).dropna().dropDuplicates()
         .groupBy("ip")
         .agg(
             F.count("*").alias("eslesme"),
@@ -81,16 +98,20 @@ def main():
     if yazilacak_adet != temiz_adet:
         raise RuntimeError(f"IP tablosuyla birleştirme satır sayısını değiştirdi: {temiz_adet} → {yazilacak_adet}")
     print(f"IP tablosuyla birleştirme sonrası: {yazilacak_adet} satır")
-    kayitlar.write.mode("overwrite").partitionBy("tarih").parquet(PARQUET)
-    print(f"Parquet yazıldı: {PARQUET}")
-    kayitlar.write.format("delta").mode("overwrite").partitionBy("tarih").save(DELTA)
-    print(f"Delta yazıldı: {DELTA}")
+    if args.analiz_cikti:
+        print("IP boyutuyla birleştirme planı")
+        kayitlar.explain(mode="formatted")
+    kayitlar.write.mode("overwrite").partitionBy("tarih").parquet(args.parquet)
+    print(f"Parquet yazıldı: {args.parquet}")
+    kayitlar.write.format("delta").mode("overwrite").partitionBy("tarih").save(args.delta)
+    print(f"Delta yazıldı: {args.delta}")
     kayitlar.unpersist()
     temiz.unpersist()
 
-    tablo = spark.read.format("delta").load(DELTA)
+    tablo = spark.read.format("delta").load(args.delta)
     print("Soru 1 · Türkiye saatine göre istek sayısı")
-    tablo.groupBy("saat_tr").count().withColumnRenamed("count", "istek").orderBy("saat_tr").show(24)
+    trafik = tablo.groupBy("saat_tr").count().withColumnRenamed("count", "istek").orderBy("saat_tr")
+    trafik.show(24)
 
     print("Soru 2 · En çok 5xx hatası üreten rotalar")
     hata_raporu = (
@@ -106,7 +127,28 @@ def main():
     )
     hata_raporu.show(truncate=False)
     hata_raporu.explain(mode="formatted")
-    spark.stop()
+
+    if args.analiz_cikti:
+        args.analiz_cikti.mkdir(parents=True, exist_ok=True)
+        csv_yaz(trafik, args.analiz_cikti / "saatlik-trafik.csv")
+        csv_yaz(hata_raporu, args.analiz_cikti / "rota-5xx.csv")
+
+        parquet = spark.read.parquet(args.parquet)
+        gun = parquet.agg(F.max("tarih")).first()[0]
+        gunluk_hata = (
+            parquet.filter((F.col("tarih") == F.lit(gun)) & F.col("durum").between(500, 599))
+            .groupBy("rota").count()
+        )
+        print(f"Tarih filtreli Parquet 5xx planı · {gun}")
+        gunluk_hata.explain(mode="formatted")
+
+
+def csv_yaz(sorgu, dosya):
+    satirlar = sorgu.collect()
+    with dosya.open("w", encoding="utf-8", newline="") as akis:
+        yazici = csv.writer(akis, lineterminator="\n")
+        yazici.writerow(sorgu.columns)
+        yazici.writerows(satirlar)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,11 @@
+rota,istek,hata_5xx,hata_yuzde
+/urun/{id},3768,247,6.56
+/static/logo.png,525,41,7.81
+/sepet,514,36,7.0
+/,544,35,6.43
+/urunler,546,35,6.41
+/yardim,513,35,6.82
+/static/app.js,488,34,6.97
+/hesabim,516,33,6.4
+/api/stok/{id},508,32,6.3
+/kampanya,527,30,5.69

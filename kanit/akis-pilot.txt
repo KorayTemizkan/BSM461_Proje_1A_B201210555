@@ -1,0 +1,40 @@
+BSM461 · B201210555 · 25.11.2026
+Koray'ın Linux Mint 22 çalışma alanında Codex tarafından yürütülen kontrollü akış pilotu.
+Java 17, Kafka 4.0.0 (127.0.0.1:19092, tek broker), Spark 3.5.3 local[2], Delta 3.2.1.
+Çıktı ve iki checkpoint geçici yerel diskte. Elasticsearch bu pilotta kapalı.
+Her evrede is/akis_iskelet.py --deney yerel-z8 --konu web-loglari-pilot --kafka 127.0.0.1:19092 --kok /tmp/bsm461-akis-ortam/sonuc --bekleyeni-isle
+Spark sürücüsü her çağrıda yeniden başlatıldı. Aynı deney kimliği, 20 s pencere ve 10 dakika watermark kullanıldı.
+Girdi üretimi: analiz/akis_pilot_veri.py, aynı grup kodu ve sabit olay zamanları.
+İlk iki gönderimde Kafka ConsoleProducer, son gönderimde confluent-kafka kullanıldı. Her gönderimde acks=all ve idempotent üretici.
+Yeni Kafka satırı: gönderimden önce ve sonra sekiz bölümün uç ofset toplamlarının farkı.
+
+Konu ayrıntısı (terminal çıktısı)
+
+Topic: web-loglari-pilot	TopicId: TEU7pBm1QHyQCrr4tfNu0A	PartitionCount: 8	ReplicationFactor: 1	Configs: 
+	Topic: web-loglari-pilot	Partition: 0	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: web-loglari-pilot	Partition: 1	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: web-loglari-pilot	Partition: 2	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: web-loglari-pilot	Partition: 3	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: web-loglari-pilot	Partition: 4	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: web-loglari-pilot	Partition: 5	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: web-loglari-pilot	Partition: 6	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr: 
+	Topic: web-loglari-pilot	Partition: 7	Leader: 1	Replicas: 1	Isr: 1	Elr: 	LastKnownElr:
+
+Geç veri %0. 100 farklı JSON ve ilk olayın birebir tekrarı.
+Yeni Kafka satırı: 101
+Temiz tekil olay: 100 | pencere sayımı: 100
+
+Aynı deney adı ve checkpoint ile yeniden çalıştırma. Yeni Kafka girdisi yok.
+Yeni Kafka satırı: 0
+Temiz tekil olay: 100 | pencere sayımı: 100
+
+Yeni 100 olayın 30 tanesi yaklaşık 5 dakika geride. 70 olay yeni.
+Yeni Kafka satırı: 100
+Temiz tekil olay: 200 | pencere sayımı: 200
+
+Yeni 20 olayın 10 tanesi referans saatin 25 dakika gerisinde, watermark dışında. 10 olay yeni.
+Yeni Kafka satırı: 20
+Temiz tekil olay: 210 | pencere sayımı: 210
+
+Son evrenin ölçümü: yeni 20 benzersiz olaydan 10 olay temiz Delta ve pencere toplamlarına eklendi.
+Makine/iş ayarları için pilot-ortam.txt, dört ölçüm adımı için akis-pilot.csv.
